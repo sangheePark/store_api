@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="appLogPath" value="/home/ec2-user/service/ad-server-backend/log"/>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />  
+    
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">	
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-3level %logger{36} - %msg %n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- real  -->
+	<springProfile name="prod">
+		<appender name="defaultAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<file>
+				${appLogPath}/sponge.log
+			</file>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<fileNamePattern>${appLogPath}/sponge.%d{yyyy-MM-dd}.log</fileNamePattern>
+			</rollingPolicy>
+	
+			<encoder>
+				<charset>UTF-8</charset>
+				<pattern>%d{HH:mm:ss.SS} %-5level %logger{36} %msg%n
+				</pattern>
+			</encoder>
+		</appender>
+		
+		<root level="INFO">
+			<appender-ref ref="defaultAppender" />
+		</root>
+	</springProfile>
+	
+	<!-- 개발 스태이지 -->
+	<springProfile name="dev">
+		<appender name="defaultAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<file>
+				${appLogPath}/sponge.log
+			</file>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<fileNamePattern>${appLogPath}/sponge.%d{yyyy-MM-dd}.log</fileNamePattern>
+			</rollingPolicy>
+
+			<encoder>
+				<charset>UTF-8</charset>
+				<pattern>%d{HH:mm:ss.SS} %-5level %logger{36} %msg%n
+				</pattern>
+			</encoder>
+		</appender>
+
+		<root level="DEBUG">
+			<appender-ref ref="defaultAppender" />
+		</root>
+	</springProfile>
+
+	<!-- 로칼 환경 -->
+	<springProfile name="local">
+		<logger name="jdbc" level="OFF"/>
+-		
+-		<logger name="jdbc.sqlonly" level="ERROR" additivity="false">
+-			<appender-ref ref="console" />
+-		</logger>
+-		
+-		<logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+-			<appender-ref ref="console" />
+-		</logger> 
+-		
+-		<logger name="jdbc.resultsettable" level="INFO" additivity="false">
+-			<appender-ref ref="console" />
+-		</logger>
+-		
+-	  	<logger name="jdbc.audit" level="OFF">
+-			<appender-ref ref="console" />
+-		</logger>
+-		
+-	  	<logger name="jdbc.resultset" level="OFF">
+-			<appender-ref ref="console" />
+-		</logger>
+-		
+-	  	<logger name="jdbc.connection" level="OFF">
+-			<appender-ref ref="console" />
+-		</logger>
+-		
+-		<logger name="co.kr.snack.store" level="DEBUG" additivity="false">
+-			<appender-ref ref="console" />
+-		</logger>
+-		
+-		<logger name="co.kr.snack.store.config.security.jwt" level="DEBUG" additivity="false">
+-			<appender-ref ref="console" />
+-		</logger>
+-		
+-		<logger name="co.kr.snack.store.config.mapper" level="INFO" additivity="false">
+-			<appender-ref ref="console" />
+-		</logger>
+
+		<root level="INFO">
+			<appender-ref ref="console" />
+		</root>
+	</springProfile>
+</configuration>

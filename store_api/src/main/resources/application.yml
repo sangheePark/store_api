@@ -1,0 +1,97 @@
+## 공통 설정 ###################################################################################
+# Server
+server:
+  port: 8080
+  servlet:
+    contextPath: /api 
+    
+spring:
+  profiles:
+    active: local # 기본 환경 선택
+  datasource:
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 60000
+      minimum-idle: 2
+      connection-test-query: select 1
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  type-handlers-package: net.spotv.adserver.enums
+#  configuration:#    map-underscore-to-camel-case: true
+   
+security:
+  max-error-count: 5
+  issuer: http://localhost
+  signing-key: spongeaccesssign
+  # 단위 시간
+  expire-time: 3
+  # expire-time의 1.5배 또는 2배로 설정
+  refresh-expire-time: 144
+  refresh-signing-key: spongerefreshsign
+  time-unit: 10
+  header: Authorization
+  prefix: Bearer 
+  login-url: /sign
+  refresh-token-url: /auth/refresh
+  root-url: /**
+  ignore-url: /api/**
+  use-login: Y
+  use-access-denied: Y
+  common-uri: common
+
+schedule:
+  use-system-operating: Y  
+  use-redis-update: Y
+
+## LOCAL ###################################################################################
+# Spring  
+---
+server:
+  port: 9090
+spring:
+  application:
+    name: WEB_LOCAL
+  profiles: local
+  
+  h2:
+    console:
+      enabled: true
+    password:
+  datasource:
+#      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+#      url: jdbc:log4jdbc:mariadb://mariadb-5874-0.cloudclusters.net:10009/spongedb
+#      username: dev
+#      password: spotv
+
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      url: jdbc:log4jdbc:mariadb://13.209.126.25:3306/spongedb
+      username: sponge
+      password: spotv12#$
+      
+redis:
+  host: 13.209.126.25
+  port: 6379  
+  vastKey: VAST
+  key: CMS    
+      
+security:
+  use-login: Y
+  use-access-denied: N
+  # 단위 시간
+  expire-time: 10
+  # expire-time의 1.5배 또는 2배로 설정
+  refresh-expire-time: 60
+  time-unit: 1
+       
+# FILE 
+file:
+  base-path: 'C:\\sponge\\files'
