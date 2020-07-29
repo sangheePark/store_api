@@ -23,6 +23,7 @@ import co.kr.snack.store.config.properties.SecurityProperties;
 import co.kr.snack.store.config.security.CorsFilterImpl;
 import co.kr.snack.store.config.security.LoginFilter;
 import co.kr.snack.store.config.security.LoginProvider;
+import co.kr.snack.store.config.security.UrlMatcher;
 import co.kr.snack.store.config.security.jwt.JwtFilter;
 import co.kr.snack.store.config.security.jwt.JwtProvider;
 import co.kr.snack.store.config.security.jwt.JwtTokenExtractor;
@@ -160,12 +161,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         /**
          * 로그인 사용시에만 사용
          */
-        if (null != securityProperties.getUseLogin() && securityProperties.getUseLogin().equals(YesNoType.YES.getCode())) {
-            decisionVoters = Arrays.asList(
-                    new WebExpressionVoter(),
-                    new RoleVoter(),
-                    new AuthenticatedVoter(), methodVoter);
-        }
+//        if (null != securityProperties.getUseLogin() && securityProperties.getUseLogin().equals(YesNoType.YES.getCode())) {
+//            decisionVoters = Arrays.asList(
+//                    new WebExpressionVoter(),
+//                    new RoleVoter(),
+//                    new AuthenticatedVoter(), methodVoter);
+//        }
         
         return new UnanimousBased(decisionVoters);
     }

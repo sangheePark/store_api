@@ -16,9 +16,9 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
+import co.kr.snack.store.config.properties.SecurityProperties;
+import co.kr.snack.store.config.security.jwt.token.RawAccessJwtToken;
 import lombok.extern.slf4j.Slf4j;
-import net.spotv.adserver.config.properties.SecurityProperties;
-import net.spotv.adserver.config.security.jwt.token.RawAccessJwtToken;
 
 /**
  * 

@@ -5,8 +5,9 @@ import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
-import net.spotv.adserver.config.security.entity.UserContext;
-import net.spotv.adserver.config.security.jwt.token.RawAccessJwtToken;
+import co.kr.snack.store.config.security.entity.UserContext;
+import co.kr.snack.store.config.security.jwt.token.RawAccessJwtToken;
+
 
 /**
  * 

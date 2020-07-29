@@ -4,10 +4,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import net.spotv.adserver.enums.ApplicationExceptionType;
+import co.kr.snack.store.config.exception.AuthorizedException;
+import co.kr.snack.store.config.properties.SecurityProperties;
+import co.kr.snack.store.enums.ApplicationExceptionType;
 
-import net.spotv.adserver.config.exception.AuthorizedException;
-import net.spotv.adserver.config.properties.SecurityProperties;
 
 /**
  * 

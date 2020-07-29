@@ -10,7 +10,16 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 
+import co.kr.snack.store.config.exception.AuthorizedException;
 import co.kr.snack.store.config.properties.SecurityProperties;
+import co.kr.snack.store.config.security.entity.UserContext;
+import co.kr.snack.store.config.security.jwt.token.RawAccessJwtToken;
+import co.kr.snack.store.domain.AccountDTO.Account;
+import co.kr.snack.store.enums.AccountStatus;
+import co.kr.snack.store.enums.ApplicationExceptionType;
+import co.kr.snack.store.service.AccountService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import lombok.extern.slf4j.Slf4j;
 
 /**
